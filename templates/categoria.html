@@ -1,0 +1,31 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">{{ categoria | title }}</h2>
+    
+    {% if productos %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for producto in productos %}
+                <div class="col">
+                    <div class="card h-100 shadow">
+                        <img src="{{ url_for('static', filename='img/' + producto.imagen) }}" 
+                             class="card-img-top" 
+                             alt="{{ producto.nombre }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ producto.nombre }}</h5>
+                            <p class="card-text">{{ producto.descripcion }}</p>
+                            <p class="h4 text-primary">${{ producto.precio }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning">
+            No hay productos en esta categoría.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
